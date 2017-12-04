@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+https://www.exxon.com/api/v1/Retail/retailstation/GetStationsByBoundingBox?
+Latitude1=40.64768480800879&Latitude2=40.77780222218161&
+Longitude1=-73.93627828095703&Longitude2=-74.16939443085937
+
+
+"""
 import scrapy
 
 from locations.items import GeojsonPointItem
@@ -6,9 +13,11 @@ from locations.items import GeojsonPointItem
 
 class ExxonMobilSpider(scrapy.Spider):
     name = "exxonmobil"
-    allowed_domains = ["www.exxonmobilstations.com"]
+    allowed_domains = ["www.exxon.com"]
     start_urls = (
-        'http://www.exxonmobilstations.com/station-locations',
+        'http://www.exxon.com/api/v1/Retail/retailstation/GetStationsByBoundingBox?'
+        'Latitude1=40.64768480800879&Latitude2=40.77780222218161&'
+        'Longitude1=-73.93627828095703&Longitude2=-74.16939443085937',
     )
 
     def store_hours(self, store_hours):
@@ -77,6 +86,7 @@ class ExxonMobilSpider(scrapy.Spider):
         return addr_tags
 
     def parse(self, response):
+        self.log(response.text)
         # This will spider through all the country and regional pages and get us to the individual store pages
         region_urls = response.xpath('//a[@class="sitemap_link sitemap_bar"]/@href').extract()
         for url in region_urls:
