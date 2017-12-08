@@ -104,6 +104,7 @@ class MightytacoSpider(scrapy.Spider):
                 data[location1['element']] =   {'lat':location1['latitude'] , 'lon':location1['longitude']}
         for store in stores:
             marker_id = store.xpath('./@id').extract_first()
+            store_id  = store.xpath('./parent::div/preceding-sibling::div[@class="anchor"]/@id').extract_first()
             properties = {
                 'addr_full': store.xpath(
                     'normalize-space(./div/div[@class="address"]/p/text())').extract_first().strip().split(',')[0],
@@ -115,7 +116,7 @@ class MightytacoSpider(scrapy.Spider):
                     'normalize-space(./div/div[@class="address"]/p/text())').extract_first().split(',')[2].lstrip().split(' ')[0],
                 'postcode': store.xpath(
                     'normalize-space(./div/div[@class="address"]/p/text())').extract_first().split(',')[2].lstrip().split(' ')[1],
-                'ref': response.url,
+                'ref': store_id,
                 'website': response.url,
                 'lat': data[marker_id]['lat'],
                 'lon': data[marker_id]['lon'],
