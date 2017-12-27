@@ -1,6 +1,6 @@
 import scrapy
 import re
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 day_formats = {
     "Mon": "Mo",
     "Tue": "Tu",
@@ -74,7 +74,7 @@ class BurgerKingSpider(scrapy.Spider):
         opening_hours = self.parse_hours(response.xpath('//div[@class="Nap-column Nap-column--3"]//div/div/table/tbody/tr[@class="c-location-hours-details-row js-day-of-week-row highlight-text"]'))
         if opening_hours:
             properties['opening_hours'] = opening_hours
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)
 
     def parse_city_stores(self, response):
         stores = response.xpath('//h2[@class="Teaser-title Heading Heading--sub Teaser-title--full"]/a[@class="Teaser-titleLink"]/@href').extract()

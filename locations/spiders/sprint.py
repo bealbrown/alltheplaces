@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class SprintSpider(scrapy.Spider):
@@ -78,7 +78,7 @@ class SprintSpider(scrapy.Spider):
         if len(response.xpath('//head/meta[@name="geo.position"]')):
             address=response.xpath('//div[@class="LocationInfo-contact"]/address/span[@class="c-address-street"]/span/text()')  
             hours=json.loads(response.xpath('//div[@id="c-hours-collapse"]/div[@class="c-location-hours"]/div[contains(@class,"c-location-hours-details-wrapper")]/@data-days').extract_first())    
-            yield GeojsonPointItem(
+            yield hourstudy(
                 lat=float(response.xpath('//span[@itemprop="geo"]/meta[@itemprop="latitude"]/@content').extract_first()),
                 lon=float(response.xpath('//span[@itemprop="geo"]/meta[@itemprop="longitude"]/@content').extract_first()),
                 phone=response.xpath('//div[@class="LocationInfo-contact"]/div[contains(@class, "c-phone-main")]/div[contains(@class,"c-phone-main-number-wrapper")]/div[@class="c-phone-number c-phone-main-number"]/span/text()').extract_first(),

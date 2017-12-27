@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class FoodLionSpider(scrapy.Spider):
@@ -96,7 +96,7 @@ class FoodLionSpider(scrapy.Spider):
             if address:
                 properties.update(address)
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)
 
         else:
             self.logger.info("No results")

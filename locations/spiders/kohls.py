@@ -2,7 +2,7 @@
 import re
 import scrapy
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class KohlsSpider(scrapy.Spider):
@@ -36,7 +36,7 @@ class KohlsSpider(scrapy.Spider):
             'opening_hours': hours
         }
 
-        return GeojsonPointItem(**properties)
+        return hourstudy(**properties)
 
     def parse_city_stores(self, response):
         stores = response.xpath('//span[@class="location-title"]/a/@href').extract()

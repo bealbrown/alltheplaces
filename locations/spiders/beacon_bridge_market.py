@@ -3,7 +3,7 @@ import scrapy
 import json
 import traceback
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 URL = 'http://www.beaconandbridge.com/wp-admin/admin-ajax.php'
 HEADERS = {
@@ -44,4 +44,4 @@ class BeaconAndBridgeSpider(scrapy.Spider):
 
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

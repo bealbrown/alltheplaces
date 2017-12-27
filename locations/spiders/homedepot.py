@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class HomeDepotSpider(scrapy.Spider):
@@ -93,4 +93,4 @@ class HomeDepotSpider(scrapy.Spider):
         if opening_hours:
             properties['opening_hours'] = opening_hours
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

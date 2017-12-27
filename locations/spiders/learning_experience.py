@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class TheLearningExperienceSpider(scrapy.Spider):
@@ -33,4 +33,4 @@ class TheLearningExperienceSpider(scrapy.Spider):
             'lat': float(response.xpath('//meta[@name="place:location:latitude"]/@content').extract_first()),
         }
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

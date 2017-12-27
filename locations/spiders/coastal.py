@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class CoastalFarmSpider(scrapy.Spider):
@@ -27,4 +27,4 @@ class CoastalFarmSpider(scrapy.Spider):
                 'website': data['url']
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

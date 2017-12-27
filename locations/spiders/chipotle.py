@@ -25,7 +25,7 @@ this is the first point to look.
 import scrapy
 import re
 import json
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 def build_links(tld, region_code, states):
@@ -162,7 +162,7 @@ class ChipotleSpider(scrapy.Spider):
                                   "extras": {"fax": self.process_phone(fax)},
                                   "lon": float(longitude),
                                   "lat": float(latitude)}
-                    yield GeojsonPointItem(**properties)
+                    yield hourstudy(**properties)
 
     def process_phone(self, phone_number):
         """

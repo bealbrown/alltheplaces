@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 URL = "qualitydairy.com"
 
@@ -106,4 +106,4 @@ class QuiznosSpider(scrapy.Spider):
         open_dates = response.xpath('//table[@id="hours-table"]//tr')
         product['opening_hours'] = self.store_hours(open_dates) if len(open_dates) > 0 else u'24/7'
 
-        yield GeojsonPointItem(**product)
+        yield hourstudy(**product)

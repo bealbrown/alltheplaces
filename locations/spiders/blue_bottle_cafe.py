@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import json
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class BlueBottleCafeSpider(scrapy.Spider):
@@ -29,4 +29,4 @@ class BlueBottleCafeSpider(scrapy.Spider):
                     'lat': store_data['latitude'],
                 }
 
-                yield GeojsonPointItem(**properties)
+                yield hourstudy(**properties)

@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class PublicStorageSpider(scrapy.Spider):
@@ -28,4 +28,4 @@ class PublicStorageSpider(scrapy.Spider):
                 "lon": lon,
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

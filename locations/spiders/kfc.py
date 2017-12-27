@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class KFCSpider(scrapy.Spider):
@@ -114,5 +114,5 @@ class KFCSpider(scrapy.Spider):
             if opening_hours:
                 properties['opening_hours'] = opening_hours
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)
 

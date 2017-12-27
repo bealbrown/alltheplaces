@@ -2,7 +2,7 @@
 import scrapy
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class ChickFilASpider(scrapy.Spider):
@@ -127,4 +127,4 @@ class ChickFilASpider(scrapy.Spider):
 
         properties.update(self.address(response))
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

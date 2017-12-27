@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class PortillosSpider(scrapy.Spider):
@@ -50,4 +50,4 @@ class PortillosSpider(scrapy.Spider):
             'lat': float(store_data['Lat']),
         }
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

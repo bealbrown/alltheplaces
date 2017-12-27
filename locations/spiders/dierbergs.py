@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 class DierbergsSpider(scrapy.Spider):
     name = "dierbergs"
@@ -35,5 +35,5 @@ class DierbergsSpider(scrapy.Spider):
                 'lat': store.xpath("@data-lat").extract_first()
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)
             

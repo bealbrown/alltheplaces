@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class TemplateSpider(scrapy.Spider):
@@ -36,4 +36,4 @@ class TemplateSpider(scrapy.Spider):
                 'lat': float(lat),
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

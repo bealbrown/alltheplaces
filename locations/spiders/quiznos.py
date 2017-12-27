@@ -4,7 +4,7 @@ import json
 import re
 import traceback
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 URL = "http://restaurants.quiznos.com"
 
@@ -16,7 +16,7 @@ class QuiznosSpider(scrapy.Spider):
     )
 
     def store_hours(self, store_hours):
-        if store_hours == '': return ''
+        if store_hours == '' or store_hours.lower().find('close') > -1: return ''
 
         day_groups = []
         this_day_group = None
@@ -67,7 +67,7 @@ class QuiznosSpider(scrapy.Spider):
 
         for store in stores:
 
-            yield GeojsonPointItem(
+            yield hourstudy(
                 lat=store.get('latitude'),
                 lon=store.get('longitude'),
                 ref=str(store.get('storeid')),

@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class CulversSpider(scrapy.Spider):
@@ -79,7 +79,7 @@ class CulversSpider(scrapy.Spider):
             if phone:
                 properties['phone'] = phone.extract_first()
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)
 
         else:
             self.logger.info("No results")

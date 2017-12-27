@@ -2,7 +2,7 @@
 import scrapy
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class HolidayStationstoreSpider(scrapy.Spider):
@@ -104,4 +104,4 @@ class HolidayStationstoreSpider(scrapy.Spider):
             'opening_hours': self.opening_hours(response),
         }
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

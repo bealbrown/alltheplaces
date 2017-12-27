@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class RedRobbinSpider(scrapy.Spider):
@@ -52,4 +52,4 @@ class RedRobbinSpider(scrapy.Spider):
 
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

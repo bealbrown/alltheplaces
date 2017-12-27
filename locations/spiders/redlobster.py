@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 DAYS = [
     "Su",
@@ -93,4 +93,4 @@ class RedLobsterSpider(scrapy.Spider):
                 'lat': location['latitude'],
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

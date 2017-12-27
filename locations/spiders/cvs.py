@@ -1,6 +1,6 @@
 import scrapy
 import re
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 DAY_MAPPING = {
     'M': 'Mo',
@@ -82,7 +82,7 @@ class CVSSpider(scrapy.Spider):
             'state': response.xpath('normalize-space(//span[@itemprop="addressRegion"]/text())').extract_first(),
             'postcode': response.xpath('normalize-space(//span[@itemprop="postalCode"]/text())').extract_first(),
             'ref': response.xpath('//link[@rel="canonical"]/@href').extract_first(),
-            'website:': response.xpath('//link[@rel="canonical"]/@href').extract_first(),
+            'website': response.xpath('//link[@rel="canonical"]/@href').extract_first(),
             'lat': float(response.xpath('normalize-space(//input[@id="toLatitude"]/@value)').extract_first()),
             'lon': float(response.xpath('normalize-space(//input[@id="toLongitude"]/@value)').extract_first()),
         }
@@ -91,7 +91,7 @@ class CVSSpider(scrapy.Spider):
         if hours:
             properties['opening_hours'] = hours
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)
 
     def parse_city_stores(self, response):
         stores = response.xpath('//div[@class="each-store"]')

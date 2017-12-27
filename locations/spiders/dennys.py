@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class DennysSpider(scrapy.Spider):
@@ -84,7 +84,7 @@ class DennysSpider(scrapy.Spider):
         if opening_hours:
             properties['opening_hours'] = opening_hours
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)
 
     def parse_state(self, response):
         urls = response.xpath('//div/ul[@class="storelist"]/li/a/@href').extract()

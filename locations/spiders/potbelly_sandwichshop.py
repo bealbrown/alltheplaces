@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class PotbellySandwichSpider(scrapy.Spider):
@@ -41,7 +41,7 @@ class PotbellySandwichSpider(scrapy.Spider):
                 'opening_hours': data['location']['hours']
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)
 
 
 def find_between(s, first, last):

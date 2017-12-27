@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class LouisaCoffeeSpider(scrapy.Spider):
@@ -22,4 +22,4 @@ class LouisaCoffeeSpider(scrapy.Spider):
                 'lat': float(location_href.xpath('@rel-store-lat').extract_first()),
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

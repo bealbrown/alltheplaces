@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 class KristoilSpider(scrapy.Spider):
     name = "kristoil"
@@ -55,4 +55,4 @@ class KristoilSpider(scrapy.Spider):
             }
             if value['phone']:
                 properties['phone'] = value['phone']
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 STATES = {
         'Utah': 'UT',
@@ -33,7 +33,7 @@ class CrownburgerSpider(scrapy.Spider):
 
     def parse_store(self, response): 
             pos=json.loads(re.search(r'initEmbed\((.*)\);',response.xpath('//script').extract()[2]).groups()[0])[21][3][0][2]
-            yield GeojsonPointItem(
+            yield hourstudy(
                 lat=float(pos[0]),
                 lon=float(pos[1]),
                 phone=response.meta.get('phone'),

@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class SephoraSpider(scrapy.Spider):
@@ -81,4 +81,4 @@ class SephoraSpider(scrapy.Spider):
         if opening_hours:
             properties['opening_hours'] = '; '.join(opening_hours)
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

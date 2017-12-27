@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 class MedExpressSpider(scrapy.Spider):
     name = "medexpress"
@@ -37,4 +37,4 @@ class MedExpressSpider(scrapy.Spider):
             store['hours'] == '1:8:00:20:00,2:8:00:20:00,3:8:00:20:00,4:8:00:20:00,5:8:00:20:00,6:8:00:20:00,7:8:00:20:00':
                 properties['opening_hours'] = 'Mo-Su 08:00-20:00'    
                                                              
-            yield GeojsonPointItem(**properties)             
+            yield hourstudy(**properties)             

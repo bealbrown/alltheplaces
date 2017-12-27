@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class CrackerBarrelSpider(scrapy.Spider):
@@ -98,8 +98,14 @@ class CrackerBarrelSpider(scrapy.Spider):
             'lat': float(data['geo']['latitude']),
         }
 
-        address = self.address(data['address'])
-        if address:
-            properties.update(address)
+        # address = self.address(data['address'])
+        # if address:
+        #     properties.update(address)
 
-        yield GeojsonPointItem(**properties)
+        # yield hourstudy(**properties)
+
+        print ("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        print (i['businesshours'])
+        print ("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+        print (hours)
+        print ("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")

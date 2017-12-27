@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 from scrapy.http import HtmlResponse
 
 class ConcentraSpider(scrapy.Spider):
@@ -61,4 +61,4 @@ class ConcentraSpider(scrapy.Spider):
             if lat: properties['lat'] = lat
             if lon: properties['lon'] = lon
                                                              
-            yield GeojsonPointItem(**properties)             
+            yield hourstudy(**properties)             

@@ -2,7 +2,7 @@
 import scrapy
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class LaBreweriesSpider(scrapy.Spider):
@@ -81,9 +81,7 @@ class LaBreweriesSpider(scrapy.Spider):
         response.selector.remove_namespaces()
         city_urls = response.xpath('//url/loc/text()').extract()
         for path in city_urls:
-            if path in "http://labeerhop.com/breweries/1056/":
-                print('Skipping URL')
-            else:
+            if path not in "http://labeerhop.com/breweries/1056/":
                 yield scrapy.Request(
                     path.strip(),
                     callback=self.parse_store,
@@ -104,4 +102,4 @@ class LaBreweriesSpider(scrapy.Spider):
             properties.update(address)
 
 
-        yield GeojsonPointItem(**properties)
+        yield hourstudy(**properties)

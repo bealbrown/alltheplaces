@@ -1,7 +1,7 @@
 import json
 import re
 import scrapy
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 keymap = {
     'addr_full': 'a',
@@ -32,4 +32,4 @@ class ShoneysSpider(scrapy.Spider):
 
             properties['ref'] = properties['addr_full']
                 
-            yield GeojsonPointItem(**properties)             
+            yield hourstudy(**properties)             

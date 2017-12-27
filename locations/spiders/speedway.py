@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class SuperAmericaSpider(scrapy.Spider):
@@ -28,7 +28,7 @@ class SuperAmericaSpider(scrapy.Spider):
         data = json.loads(response.body_as_unicode())
 
         for store in data:
-            yield GeojsonPointItem(
+            yield hourstudy(
                 addr_full=store['address'],
                 city=store['city'],
                 state=store['state'],

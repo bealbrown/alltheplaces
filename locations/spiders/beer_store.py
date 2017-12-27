@@ -2,7 +2,7 @@
 import scrapy
 import json
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class BeerStoreSpider(scrapy.Spider):
@@ -27,4 +27,4 @@ class BeerStoreSpider(scrapy.Spider):
                 'addr_full': description[:description.find(end_str)]
             }
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)

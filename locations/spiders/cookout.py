@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class CookoutSpider(scrapy.Spider):
@@ -99,7 +99,7 @@ class CookoutSpider(scrapy.Spider):
             if phone:
                 properties['phone'] = phone
 
-            yield GeojsonPointItem(**properties)
+            yield hourstudy(**properties)
 
         else:
             self.logger.info("No results")

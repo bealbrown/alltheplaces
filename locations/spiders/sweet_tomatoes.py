@@ -3,7 +3,7 @@ import scrapy
 import json
 import re
 
-from locations.items import GeojsonPointItem
+from locations.items import hourstudy
 
 
 class SweetTomatoesSpider(scrapy.Spider):
@@ -75,22 +75,25 @@ class SweetTomatoesSpider(scrapy.Spider):
     def parse(self, response):
         results = json.loads(response.body_as_unicode())
         for data in results:
-            properties = {
-                'ref': data['id'],
-                'name': data['store'],
-                'lat': data['lat'],
-                'lon': data['lng'],
-                'addr_full': data['address'],
-                'city': data['city'],
-                'state': data['state'],
-                'postcode': data['zip'],
-                'country': data['country'],
-                'phone': data['phone'],
-                'website': data['permalink'],
-                "opening_hours": self.store_hours(data['hours'])
-            }
+            # properties = {
+            #     'ref': data['id'],
+            #     'name': data['store'],
+            #     'lat': data['lat'],
+            #     'lon': data['lng'],
+            #     'addr_full': data['address'],
+            #     'city': data['city'],
+            #     'state': data['state'],
+            #     'postcode': data['zip'],
+            #     'country': data['country'],
+            #     'phone': data['phone'],
+            #     'website': data['permalink'],
+            #     "opening_hours": self.store_hours(data['hours'])
+            # }
 
-            yield GeojsonPointItem(**properties)
+            raw = data['hours']
+            formatted = self.store_hours(data['hours'])
+            yield hourstudy(raw,formatted)
+
 
 
 
