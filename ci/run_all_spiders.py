@@ -71,110 +71,110 @@ if __name__ == '__main__':
         with gzip.open(output_results + '.gz', 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
 
-    s3_output_size = os.path.getsize(output_results + '.gz')
-    s3_output_size_mb = s3_output_size / 1024 / 1024
+    # s3_output_size = os.path.getsize(output_results + '.gz')
+    # s3_output_size_mb = s3_output_size / 1024 / 1024
 
-    # Post it to S3
-    s3_output_key = '{}/{}.gz'.format(s3_key_prefix, output_results)
-    client.upload_file(
-        output_results + '.gz',
-        s3_bucket,
-        s3_output_key,
-        ExtraArgs={
-            'ACL': 'public-read',
-            'ContentType': 'application/json',
-            'ContentDisposition': 'attachment; filename="output-{}.geojson.gz"'.format(tstamp),
-        }
-    )
+    # # Post it to S3
+    # s3_output_key = '{}/{}.gz'.format(s3_key_prefix, output_results)
+    # client.upload_file(
+    #     output_results + '.gz',
+    #     s3_bucket,
+    #     s3_output_key,
+    #     ExtraArgs={
+    #         'ACL': 'public-read',
+    #         'ContentType': 'application/json',
+    #         'ContentDisposition': 'attachment; filename="output-{}.geojson.gz"'.format(tstamp),
+    #     }
+    # )
 
-    print("Saved output to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_output_key))
+    # print("Saved output to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_output_key))
 
-    # Gzip the log file
-    with open(output_log, 'rb') as f_in:
-        with gzip.open(output_log + '.gz', 'wb') as f_out:
-            shutil.copyfileobj(f_in, f_out)
+    # # Gzip the log file
+    # with open(output_log, 'rb') as f_in:
+    #     with gzip.open(output_log + '.gz', 'wb') as f_out:
+    #         shutil.copyfileobj(f_in, f_out)
 
-    # Post it to S3
-    s3_log_key = '{}/{}.gz'.format(s3_key_prefix, output_log)
-    client.upload_file(
-        output_log + '.gz',
-        s3_bucket,
-        s3_log_key,
-        ExtraArgs={
-            'ACL': 'public-read',
-            'ContentType': 'text/plain; charset=utf-8',
-            'ContentEncoding': 'gzip',
-        }
-    )
+    # # Post it to S3
+    # s3_log_key = '{}/{}.gz'.format(s3_key_prefix, output_log)
+    # client.upload_file(
+    #     output_log + '.gz',
+    #     s3_bucket,
+    #     s3_log_key,
+    #     ExtraArgs={
+    #         'ACL': 'public-read',
+    #         'ContentType': 'text/plain; charset=utf-8',
+    #         'ContentEncoding': 'gzip',
+    #     }
+    # )
 
-    print("Saved logfile to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_log_key))
+    # print("Saved logfile to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_log_key))
 
-    metadata = {
-        'spiders': spider_stats,
-        'links': {
-            'download_url': "https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_output_key),
-            'log_url': "https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_log_key),
-        }
-    }
+    # metadata = {
+    #     'spiders': spider_stats,
+    #     'links': {
+    #         'download_url': "https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_output_key),
+    #         'log_url': "https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_log_key),
+    #     }
+    # }
 
-    with open('metadata.json', 'w') as f:
-        json.dump(metadata, f, indent=2)
+    # with open('metadata.json', 'w') as f:
+    #     json.dump(metadata, f, indent=2)
 
-    s3_key = '{}/metadata.json'.format(s3_key_prefix)
-    client.upload_file(
-        'metadata.json',
-        s3_bucket,
-        s3_key,
-        ExtraArgs={
-            'ACL': 'public-read',
-            'ContentType': 'application/json; charset=utf-8',
-        }
-    )
-    print("Saved metadata to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_key))
+    # # s3_key = '{}/metadata.json'.format(s3_key_prefix)
+    # # client.upload_file(
+    # #     'metadata.json',
+    # #     s3_bucket,
+    # #     s3_key,
+    # #     ExtraArgs={
+    #         'ACL': 'public-read',
+    #         'ContentType': 'application/json; charset=utf-8',
+    #     }
+    # )
+    # print("Saved metadata to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_key))
 
-    s3_key = 'runs/latest/metadata.json'
-    client.upload_file(
-        'metadata.json',
-        s3_bucket,
-        s3_key,
-        ExtraArgs={
-            'ACL': 'public-read',
-            'ContentType': 'application/json; charset=utf-8',
-        }
-    )
-    print("Saved metadata to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_key))
+    # s3_key = 'runs/latest/metadata.json'
+    # client.upload_file(
+    #     'metadata.json',
+    #     s3_bucket,
+    #     s3_key,
+    #     ExtraArgs={
+    #         'ACL': 'public-read',
+    #         'ContentType': 'application/json; charset=utf-8',
+    #     }
+    # )
+    # print("Saved metadata to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_key))
 
-    total_count = sum(
-        filter(
-            None,
-            (s['item_scraped_count'] for s in spider_stats.values())
-        )
-    )
-    template_content = {
-        'download_url': 'https://s3.amazonaws.com/{}/{}'.format(s3_bucket, s3_output_key),
-        'download_size': round(s3_output_size_mb, 1),
-        'row_count': total_count,
-        'spider_count': len(spider_stats),
-        'updated_datetime': utcnow.replace(microsecond=0).isoformat(),
-    }
-    with open('info_embed.html', 'w') as f:
-        f.write(
-            "<html><body>"
-            "<a href=\"{download_url}\">Download</a> "
-            "({download_size} MB)<br/><small>{row_count:,} rows from "
-            "{spider_count} spiders, updated {updated_datetime}Z</small>"
-            "</body></html>\n".format(
-                **template_content
-            )
-        )
-    s3_key = 'runs/latest/info_embed.html'
-    client.upload_file(
-        'info_embed.html',
-        s3_bucket,
-        s3_key,
-        ExtraArgs={
-            'ACL': 'public-read',
-            'ContentType': 'text/html; charset=utf-8',
-        }
-    )
-    print("Saved embed to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_key))
+    # total_count = sum(
+    #     filter(
+    #         None,
+    #         (s['item_scraped_count'] for s in spider_stats.values())
+    #     )
+    # )
+    # template_content = {
+    #     'download_url': 'https://s3.amazonaws.com/{}/{}'.format(s3_bucket, s3_output_key),
+    #     'download_size': round(s3_output_size_mb, 1),
+    #     'row_count': total_count,
+    #     'spider_count': len(spider_stats),
+    #     'updated_datetime': utcnow.replace(microsecond=0).isoformat(),
+    # }
+    # with open('info_embed.html', 'w') as f:
+    #     f.write(
+    #         "<html><body>"
+    #         "<a href=\"{download_url}\">Download</a> "
+    #         "({download_size} MB)<br/><small>{row_count:,} rows from "
+    #         "{spider_count} spiders, updated {updated_datetime}Z</small>"
+    #         "</body></html>\n".format(
+    #             **template_content
+    #         )
+    #     )
+    # s3_key = 'runs/latest/info_embed.html'
+    # client.upload_file(
+    #     'info_embed.html',
+    #     s3_bucket,
+    #     s3_key,
+    #     ExtraArgs={
+    #         'ACL': 'public-read',
+    #         'ContentType': 'text/html; charset=utf-8',
+    #     }
+    # )
+    # print("Saved embed to https://s3.amazonaws.com/{}/{}".format(s3_bucket, s3_key))
