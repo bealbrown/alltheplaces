@@ -86,14 +86,14 @@ class McDonalsFRSpider(scrapy.Spider):
         #         'website': 'https://www.restaurants.mcdonalds.fr' + data['datasheet']['web']
         #     }
 
-            opening_hours = self.store_hours(data['datasheet']['descList'])
-            # if opening_hours:
-            #     properties['opening_hours'] = opening_hours
+        opening_hours = self.store_hours(data['datasheet']['descList'])
+        # if opening_hours:
+        #     properties['opening_hours'] = opening_hours
 
-            # yield hourstudy(**properties)
+        # yield hourstudy(**properties)
 
-            print ("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-            print (data['datasheet']['descList'])
-            print ("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-            print (opening_hours)
-            print ("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")
+        print ("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        print (data['datasheet']['descList'])
+        print ("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+        print (opening_hours)
+        print ("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")

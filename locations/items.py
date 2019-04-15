@@ -8,7 +8,7 @@
 import scrapy
 
 
-class GeojsonPointItem(scrapy.Item):
+class hourstudy(scrapy.Item):
     lat = scrapy.Field()
     lon = scrapy.Field()
     name = scrapy.Field()

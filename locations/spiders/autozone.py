@@ -39,6 +39,7 @@ class AutoZoneSpider(scrapy.Spider):
 
         if len(reversed_hours) == 1 and list(reversed_hours)[0] == '00:00-24:00':
             return '24/7'
+            
         opening_hours = []
 
         for key, value in reversed_hours.items():
